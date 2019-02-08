@@ -19,7 +19,13 @@ spec:
         image: arunma/mlflow-gcp
         env:
         - name: GCLOUD_SERVICE_KEY_ENC
-          value: "$(GCLOUD_SERVICE_KEY_ENC)"
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-env-secret
+              key: GCLOUD_SERVICE_KEY_ENC
         - name: GCP_STORAGE_BUCKET
-          value: "$(GCP_STORAGE_BUCKET)"
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-env-secret
+              key: GCP_STORAGE_BUCKET
         command: ["/start.sh"]

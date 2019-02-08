@@ -43,9 +43,28 @@ export GCP_STORAGE_BUCKET=<GS_BUCKET_NAME>
 
 Optional : export EXPERIMENT_NAME=<NAME_OF_THE_EXPERIMENT>
 
-kubectl create -f mlflow-gcp-pod.yaml
+```
+
+**Create secret in Kubernetes from local environment variable**
+
+This script just replaces the `GCLOUD_SERVICE_KEY_ENC` and `GCP_STORAGE_BUCKET` variables in `mlflow-gcp-secret.yaml.template` file with the values from the local environment variable. 
+
+Also creates the `Secret` in Kubernetes
 
 ```
+source ./populate_secret.sh
+```
+
+
+**Create Deployment and service**
+```
+kubectl create -f mlflow-gcp-deployment.yaml
+
+kubectl create -f mlflow-gcp-service.yaml
+```
+
+
+
 
 
 
