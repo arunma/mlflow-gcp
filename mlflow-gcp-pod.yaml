@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mlflow-gcp
-        image: mlflow-gcp
+        image: arunma/mlflow-gcp
         env:
         - name: GCLOUD_SERVICE_KEY_ENC
           value: "$(GCLOUD_SERVICE_KEY_ENC)"
