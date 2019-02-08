@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-gcp-deploy
+  labels:
+    app: mlflow-gcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow-gcp
+  template:
+    metadata:
+      labels:
+        app: mlflow-gcp
+    spec:
+      containers:
+      - name: mlflow-gcp
+        image: mlflow-gcp
+        env:
+        - name: GCLOUD_SERVICE_KEY_ENC
+          value: "$(GCLOUD_SERVICE_KEY_ENC)"
+        - name: GCP_STORAGE_BUCKET
+          value: "$(GCP_STORAGE_BUCKET)"
+        command: ["/start.sh"]
