@@ -39,10 +39,19 @@ arunma/mlflow-gcp:latest
 
 **Run using kubectl**
 
+Provision kubernetes cluster
+
+```shell
+# create cluster
+gcloud container clusters create my-cluster --region asia-southeast1
+
+# run this if you need to configure your shell to talk to this cluster (e.g. if you restarted your computer)
+gcloud container clusters get-credentials my-cluster 
+```
 
 ```bash
 export GCLOUD_SERVICE_KEY_ENC=$(cat <PATH_TO_SECRET_JSON> | base64)
-export GCP_STORAGE_BUCKET=<GS_BUCKET_NAME>
+export GCP_STORAGE_BUCKET=<GS_BUCKET_NAME> # exclude gs:// prefix
 
 Optional : export EXPERIMENT_NAME=<NAME_OF_THE_EXPERIMENT>
 
@@ -66,6 +75,7 @@ kubectl create -f mlflow-gcp-deployment.yaml
 kubectl create -f mlflow-gcp-service.yaml
 ```
 
+To get the public IP of your kubernetes cluster, run `kubectl get service` after 2 minutes or so
 
 
 
