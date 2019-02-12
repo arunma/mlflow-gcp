@@ -12,12 +12,14 @@ Download the API key (JSON)
 
 ```bash
 export GCLOUD_SERVICE_KEY_ENC=$(cat <PATH_TO_SECRET_JSON> | base64)
-export GCP_STORAGE_BUCKET=<GS_BUCKET_NAME>
+export GCP_STORAGE_BUCKET=<GS_BUCKET_NAME> # exclude gs:// prefix
 
+docker pull arunma/mlflow-gcp
 docker run --name mlflow -P \
 -e GCLOUD_SERVICE_KEY_ENC=$GCLOUD_SERVICE_KEY_ENC \
 -e GCP_STORAGE_BUCKET=$GCP_STORAGE_BUCKET \
-mlflow-gcp:latest
+-p 5000:5000 \
+arunma/mlflow-gcp:latest
 
 ```
 
@@ -26,11 +28,12 @@ mlflow-gcp:latest
 ```bash 
 export EXPERIMENT_NAME=<NAME_OF_THE_EXPERIMENT>
 
-docker run --name mlflow -P \
+docker run --name mlflow -it -P \
 -e GCLOUD_SERVICE_KEY_ENC=$GCLOUD_SERVICE_KEY_ENC \
 -e GCP_STORAGE_BUCKET=$GCP_STORAGE_BUCKET \
 -e EXPERIMENT_NAME=$EXPERIMENT_NAME \
-mlflow-gcp:latest
+-p 5000:5000 \
+arunma/mlflow-gcp:latest
 
 ```
 
